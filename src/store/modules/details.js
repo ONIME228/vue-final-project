@@ -4,7 +4,6 @@ const details = {
   state: {
     detailsData: {},
   },
-  getters: {},
   mutations: {
     updateDetailsData(state, value) {
       state.detailsData = { ...value };

@@ -3,15 +3,19 @@
     <div class="link-wrapper">
       <router-link
         to="/characters"
-        class="link-wrapper__link"
-        :class="{ 'link-wrapper__link--focused': isCharacters }"
+        :class="{
+          'link-wrapper__link': true,
+          'link-wrapper__link--focused': isCharacters,
+        }"
       >
         Character
       </router-link>
       <router-link
         to="/favourites"
-        class="link-wrapper__link"
-        :class="{ 'link-wrapper__link--focused': isFavourites }"
+        :class="{
+          'link-wrapper__link': true,
+          'link-wrapper__link--focused': isFavourites,
+        }"
       >
         Favourites
       </router-link>
@@ -27,7 +31,6 @@
 import { mapState } from "vuex";
 
 export default {
-  created() {},
   data() {
     return {};
   },

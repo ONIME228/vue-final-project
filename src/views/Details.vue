@@ -25,6 +25,8 @@ export default {
     DetailsCard,
     PulseLoader,
   },
+  //You can find array style props in most of the components for the sake of the time
+  props: ["id"],
   created() {
     this.fetchDetailsCard(this.id).catch(() => {
       this.$router.push({
@@ -41,7 +43,6 @@ export default {
     ...mapActions("details", ["fetchDetailsCard"]),
     ...mapMutations("favourites", ["addFavourites", "removeFavourites"]),
   },
-  props: ["id"],
 };
 </script>
 <style scoped>
