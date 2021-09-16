@@ -2,8 +2,9 @@ const favourites = {
   namespaced: true,
   state: {
     listOfFavourites: [
-      ...(localStorage.getItem("listOfFavourites") &&
-        JSON.parse(localStorage.getItem("listOfFavourites"))),
+      ...((localStorage.getItem("listOfFavourites") &&
+        JSON.parse(localStorage.getItem("listOfFavourites"))) ||
+        []),
     ],
   },
   getters: {
