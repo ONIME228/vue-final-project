@@ -20,7 +20,7 @@
       >
         <router-link
           class="options__link"
-          :to="{ name: 'Characters', query: { species: 'human' } }"
+          :to="{ name: 'Characters', query: { species: 'human', name } }"
         >
           Human
         </router-link>
@@ -33,7 +33,7 @@
       >
         <router-link
           class="options__link"
-          :to="{ name: 'Characters', query: { species: 'animal' } }"
+          :to="{ name: 'Characters', query: { species: 'animal', name } }"
         >
           Animal
         </router-link>
@@ -46,7 +46,7 @@
       >
         <router-link
           class="options__link"
-          :to="{ name: 'Characters', query: { species: 'alien' } }"
+          :to="{ name: 'Characters', query: { species: 'alien', name } }"
         >
           Alien
         </router-link>
@@ -110,27 +110,16 @@ export default {
   props: ["page", "species", "name"],
   created() {
     watchEffect(() => {
-      if (this.name) {
-        this.fetchAllCards({
-          page: this.page,
-          name: this.name,
-        }).catch(() => {
-          this.$router.push({
-            name: "NotFound",
-            params: { catchAll: "404" },
-          });
+      this.fetchAllCards({
+        page: this.page,
+        species: this.species,
+        name: this.name,
+      }).catch(() => {
+        this.$router.push({
+          name: "NotFound",
+          params: { catchAll: "404" },
         });
-      } else {
-        this.fetchAllCards({
-          page: this.page,
-          species: this.species,
-        }).catch(() => {
-          this.$router.push({
-            name: "NotFound",
-            params: { catchAll: "404" },
-          });
-        });
-      }
+      });
     });
   },
   computed: {
@@ -145,7 +134,7 @@ export default {
     updateOnSearch() {
       this.$router.push({
         name: "Characters",
-        query: { page: 1, name: this.searchValue },
+        query: { page: 1, species: this.species, name: this.searchValue },
       });
     },
     searchOnEnter(event) {

@@ -4,14 +4,14 @@
       <router-link
         to="/characters"
         class="link-wrapper__link"
-        :class="{ 'link-wrapper__link--focused': isCharacters }"
+        active-class="link-wrapper__link--focused"
       >
         Character
       </router-link>
       <router-link
         to="/favourites"
         class="link-wrapper__link"
-        :class="{ 'link-wrapper__link--focused': isFavourites }"
+        active-class="link-wrapper__link--focused"
       >
         Favourites
       </router-link>
@@ -33,12 +33,6 @@ export default {
   },
   computed: {
     ...mapState("favourites", ["listOfFavourites"]),
-    isCharacters() {
-      return this.$route.name === "Characters";
-    },
-    isFavourites() {
-      return this.$route.name === "Favourites";
-    },
     showFavQuantity() {
       const quantity = this.listOfFavourites.length;
       return quantity ? quantity : "";

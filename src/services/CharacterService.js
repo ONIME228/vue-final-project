@@ -11,12 +11,10 @@ const apiClient = axios.create({
 export default {
   getCharacters(payload) {
     const { page, species, name } = payload;
-    const isSpecies = species ? `&species=${species}` : "";
-    const isName = name ? `&name=${name}` : "";
-    return apiClient.get(`/character/?page=${page}${isSpecies}${isName}`);
+    return apiClient.get('/character', { params: { page, species, name } });
   },
   searchCharacters(query) {
-    return apiClient.get(`/character/?name=${query}`);
+    return apiClient.get('/character', { params: { name: query } });
   },
   getCharacterById(id) {
     return apiClient.get(`/character/${id}`);
