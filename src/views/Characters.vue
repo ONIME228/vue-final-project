@@ -2,20 +2,9 @@
   <div class="filter">
     <ul class="options">
       <li
-        class="options__option"
-        :class="{ 'options__option--focused': !this.$route.query.species }"
-      >
-        <router-link
-          class="options__link"
-          :to="{ name: 'Characters', query: {} }"
-        >
-          All
-        </router-link>
-      </li>
-      <li
-        class="options__option"
         :class="{
-          'options__option--focused': this.$route.query.species === 'human',
+          options__option: true,
+          'options__option--focused': !this.$route.query.species,
         }"
       >
         <router-link
@@ -35,20 +24,22 @@
           class="options__link"
           :to="{ name: 'Characters', query: { species: 'animal', name } }"
         >
-          Animal
+          All
         </router-link>
       </li>
       <li
-        class="options__option"
+        v-for="(item, index) in listItems"
+        :key="index"
         :class="{
-          'options__option--focused': this.$route.query.species === 'alien',
+          options__option: true,
+          'options__option--focused': this.$route.query.species === item,
         }"
       >
         <router-link
           class="options__link"
           :to="{ name: 'Characters', query: { species: 'alien', name } }"
         >
-          Alien
+          {{ item }}
         </router-link>
       </li>
     </ul>
@@ -58,18 +49,15 @@
         class="search__input"
         type="search"
         placeholder="Search by name..."
-        name=""
         @keyup="searchOnEnter"
       />
-      <button class="search__button" for="f1" @click="updateOnSearch">
-        Search
-      </button>
+      <button class="search__button" @click="updateOnSearch">Search</button>
     </div>
   </div>
   <PulseLoader v-if="isLoading" />
   <div class="cards-wrapper" v-else>
     <CharacterCard
-      v-for="(card, index) in cards"
+      v-for="(card, index) in listOfCards"
       :key="index"
       :id="card.id"
       :image="card.image"
@@ -105,6 +93,7 @@ export default {
   data() {
     return {
       searchValue: "",
+      listItems: ["human", "animal", "alien"],
     };
   },
   props: ["page", "species", "name"],
@@ -124,9 +113,6 @@ export default {
   },
   computed: {
     ...mapState(["listOfCards", "lastPage", "isLoading"]),
-    cards() {
-      return this.listOfCards;
-    },
   },
   methods: {
     ...mapActions(["fetchAllCards"]),
@@ -173,6 +159,7 @@ export default {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
+  text-transform: capitalize;
 }
 .search__input,
 .search__button {

@@ -14,7 +14,6 @@ const store = createStore({
         lastPage: null,
         isLoading: true,
     },
-    getters: {},
     mutations: {
         addCards(state, arrayOfItems) {
             state.listOfCards = [...arrayOfItems];

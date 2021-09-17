@@ -14,7 +14,6 @@
         :name="card.name"
         :species="card.species"
         :status="card.status"
-        @onAddToFav="addFavourites([card])"
         @on-remove-from-fav="removeFavourites(card.id)"
       />
     </div>
@@ -32,7 +31,7 @@ export default {
     ...mapState("favourites", ["listOfFavourites"]),
   },
   methods: {
-    ...mapMutations("favourites", ["addFavourites", "removeFavourites"]),
+    ...mapMutations("favourites", ["removeFavourites"]),
   },
 };
 </script>

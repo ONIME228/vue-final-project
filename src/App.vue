@@ -27,7 +27,6 @@
 import { mapState } from "vuex";
 
 export default {
-  created() {},
   data() {
     return {};
   },
